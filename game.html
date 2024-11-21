@@ -271,6 +271,111 @@
             margin: 1rem 0;
             font-weight: 500;
         }
+
+        /* 添加响应式样式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .game-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .game-rules {
+                padding: 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .game-rules h2 {
+                font-size: 1.5rem;
+            }
+
+            .number-display {
+                font-size: 3.5rem;
+                min-height: 120px;
+            }
+
+            .timer {
+                font-size: 2.5rem;
+                min-width: 60px;
+                min-height: 60px;
+            }
+
+            .input-section {
+                width: 100%;
+            }
+
+            input[type="number"] {
+                width: 100%;
+                max-width: 280px;
+                padding: 0.8rem;
+                font-size: 1.2rem;
+            }
+
+            button {
+                width: 100%;
+                max-width: 280px;
+                margin-top: 0.5rem;
+            }
+
+            .progress-bar {
+                padding: 0.5rem;
+            }
+
+            .level-box {
+                height: 28px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+
+            .game-title {
+                font-size: 1.8rem;
+            }
+
+            .game-rules {
+                padding: 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .number-display {
+                font-size: 3rem;
+                min-height: 100px;
+            }
+
+            .timer {
+                font-size: 2rem;
+                min-width: 50px;
+                min-height: 50px;
+            }
+
+            .progress-bar {
+                gap: 4px;
+            }
+
+            .level-box {
+                height: 24px;
+                font-size: 0.7rem;
+            }
+
+            .result {
+                font-size: 1.4rem;
+            }
+
+            .score-highlight {
+                font-size: 2rem;
+            }
+
+            .evaluation {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
