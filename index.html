@@ -75,14 +75,14 @@
             overflow: hidden;
             margin: 0 auto;
             max-width: 900px;
-            height: 800px; /* 增加容器高度 */
+            height: 800px;
         }
 
         .game-frame {
             width: 100%;
-            height: 100%; /* 使用100%高度填充容器 */
+            height: 100%;
             border: none;
-            display: block; /* 确保没有额外空间 */
+            display: block;
         }
 
         /* Features Section */
@@ -196,15 +196,61 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .game-container {
+                height: 600px;
+                border-radius: 10px;
+                margin: 0 -15px;
             }
 
             .features-grid, .steps-grid, .benefits-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .game-frame {
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .feature-card, .step-card, .benefit-card {
+                padding: 1.5rem;
+            }
+
+            .scoring-details {
+                padding: 1.5rem;
+            }
+
+            .features, .how-to-play, .scoring, .benefits {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .game-container {
                 height: 500px;
+            }
+
+            .container {
+                padding: 0 10px;
             }
         }
     </style>
