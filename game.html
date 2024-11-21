@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记忆力训练游戏</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --success-color: #4CAF50;
+            --error-color: #f72585;
+            --background-color: #f8f9fa;
+            --text-color: #2b2d42;
+            --light-text: #6c757d;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .progress-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 2rem;
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .level-box {
+            flex: 1;
+            height: 35px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .level-box.correct {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .level-box.wrong {
+            background-color: var(--error-color);
+            border-color: var(--error-color);
+            color: white;
+            transform: scale(0.95);
+        }
+
+        .game-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-rules {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .game-rules h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .game-rules p {
+            margin: 0.8rem 0;
+            color: var(--light-text);
+        }
+
+        .number-display {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            animation: numberAppear 0.5s ease-out;
+        }
+
+        .timer {
+            font-size: 3rem;
+            color: var(--error-color);
+            margin: 1.5rem 0;
+            font-weight: 700;
+            text-align: center;
+            min-width: 80px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: pulse 1s infinite;
+        }
+
+        .input-section {
+            margin: 2rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        input[type="number"] {
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            width: 300px;
+            margin: 1rem;
+            border: 3px solid var(--primary-color);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        input[type="number"]:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin: 2rem 0;
+            font-size: 1.8rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .result p {
+            margin: 1rem 0;
+            color: var(--text-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes numberAppear {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #result-screen {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        #result-screen h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-highlight {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .evaluation {
+            font-size: 1.5rem;
+            color: var(--success-color);
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <!-- 进度条会通过 JavaScript 动态生成 -->
+        </div>
+        
+        <div id="welcome-screen">
+            <h1 class="game-title">记忆力训练游戏</h1>
+            <div class="game-rules">
+                <h2>游戏规则</h2>
+                <p>1. 游戏共有20关，难度逐渐增加</p>
+                <p>2. 每关显示一个数字，时间为5秒钟</p>
+                <p>3. 记住数字后，在输入框中输入你记住的数字</p>
+                <p>4. 答对显示绿色，答错显示红色</p>
+                <p>5. 计分规则：第1关5分，第2关10分，以此类推</p>
+                <p>6. 总分1050分，840分以上为优秀</p>
+            </div>
+            <button id="start-button">开始游戏</button>
+        </div>
+
+        <div id="game-screen" class="hidden">
+            <div class="number-display"></div>
+            <div class="timer"></div>
+            <div class="input-section hidden">
+                <input type="number" id="answer-input" placeholder="请输入你记住的数字">
+                <button id="submit-button">提交答案</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+            <h2>游戏结束</h2>
+            <div class="result"></div>
+            <button id="restart-button">再玩一次</button>
+        </div>
+    </div>
+
+    <script>
+        class MemoryGame {
+            constructor() {
+                this.currentLevel = 0;
+                this.totalLevels = 20;
+                this.score = 0;
+                this.currentNumber = '';
+                this.timer = null;
+                this.timeLeft = 5;
+                this.results = new Array(this.totalLevels).fill(null);
+
+                // DOM 元素
+                this.welcomeScreen = document.getElementById('welcome-screen');
+                this.gameScreen = document.getElementById('game-screen');
+                this.resultScreen = document.getElementById('result-screen');
+                this.numberDisplay = document.querySelector('.number-display');
+                this.timerDisplay = document.querySelector('.timer');
+                this.inputSection = document.querySelector('.input-section');
+                this.answerInput = document.getElementById('answer-input');
+                this.progressBar = document.querySelector('.progress-bar');
+
+                // 按钮事件监听
+                document.getElementById('start-button').addEventListener('click', () => this.startGame());
+                document.getElementById('submit-button').addEventListener('click', () => this.checkAnswer());
+                document.getElementById('restart-button').addEventListener('click', () => this.restart());
+                
+                // 键盘事件监听
+                this.answerInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.checkAnswer();
+                    }
+                });
+
+                // 初始化进度条
+                this.initProgressBar();
+            }
+
+            initProgressBar() {
+                this.progressBar.innerHTML = '';
+                for (let i = 0; i < this.totalLevels; i++) {
+                    const box = document.createElement('div');
+                    box.className = 'level-box';
+                    box.textContent = i + 1;
+                    this.progressBar.appendChild(box);
+                }
+            }
+
+            startGame() {
+                this.welcomeScreen.classList.add('hidden');
+                this.gameScreen.classList.remove('hidden');
+                this.startLevel();
+            }
+
+            startLevel() {
+                this.timeLeft = 5;
+                this.inputSection.classList.add('hidden');
+                this.numberDisplay.style.display = 'flex';
+                
+                // 生成当前关卡的数字
+                const digits = this.currentLevel + 1;
+                let min = Math.pow(10, digits - 1);
+                let max = Math.pow(10, digits) - 1;
+                this.currentNumber = Math.floor(Math.random() * (max - min + 1) + min).toString();
+                
+                // 添加动画效果
+                this.numberDisplay.style.opacity = '0';
+                this.numberDisplay.textContent = this.currentNumber;
+                setTimeout(() => {
+                    this.numberDisplay.style.opacity = '1';
+                }, 100);
+
+                this.startTimer();
+            }
+
+            startTimer() {
+                this.timerDisplay.textContent = this.timeLeft;
+                clearInterval(this.timer);
+                
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.timerDisplay.textContent = this.timeLeft;
+                    
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.showInputSection();
+                    }
+                }, 1000);
+            }
+
+            showInputSection() {
+                this.numberDisplay.style.display = 'none';
+                this.timerDisplay.textContent = '';
+                this.inputSection.classList.remove('hidden');
+                this.answerInput.value = '';
+                this.answerInput.focus();
+            }
+
+            checkAnswer() {
+                const userAnswer = this.answerInput.value;
+                const correct = userAnswer === this.currentNumber;
+                
+                // 更新进度条
+                const levelBox = this.progressBar.children[this.currentLevel];
+                levelBox.className = `level-box ${correct ? 'correct' : 'wrong'}`;
+                
+                // 计算得分
+                if (correct) {
+                    this.score += (this.currentLevel + 1) * 5;
+                }
+                
+                this.results[this.currentLevel] = correct;
+                this.currentLevel++;
+
+                if (this.currentLevel < this.totalLevels) {
+                    this.startLevel();
+                } else {
+                    this.showResults();
+                }
+            }
+
+            showResults() {
+                this.gameScreen.classList.add('hidden');
+                this.resultScreen.classList.remove('hidden');
+                
+                const resultDiv = document.querySelector('.result');
+                const correctCount = this.results.filter(r => r).length;
+                const percentage = (this.score / 1050 * 100).toFixed(1);
+                
+                let evaluation = '';
+                if (this.score >= 840) {
+                    evaluation = '太棒了！你的记忆力非常出色！';
+                } else if (this.score >= 630) {
+                    evaluation = '不错！继续加油！';
+                } else {
+                    evaluation = '继续练习，你会做得更好！';
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="score-highlight">总分：${this.score}/1050</div>
+                    <p>正确率：${correctCount}/${this.totalLevels} (${percentage}%)</p>
+                    <div class="evaluation">${evaluation}</div>
+                `;
+            }
+
+            restart() {
+                this.currentLevel = 0;
+                this.score = 0;
+                this.results.fill(null);
+                this.initProgressBar();
+                this.resultScreen.classList.add('hidden');
+                this.welcomeScreen.classList.remove('hidden');
+            }
+        }
+
+        // 启动游戏
+        window.onload = () => {
+            new MemoryGame();
+        };
+    </script>
+</body>
+</html>
