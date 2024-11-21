@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Test Game - Challenge Your Memory Skills | MemoryQuiz.xyz</title>
+    <meta name="description" content="Test and improve your memory skills with our free online memory test game. Challenge yourself through 20 levels of increasing difficulty. Perfect for students and professionals.">
+    <meta name="keywords" content="memory test, memory game, memory training, brain training, cognitive skills, memory quiz">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --background: #ffffff;
+            --text: #2b2d42;
+            --light-text: #6c757d;
+            --light-bg: #f8f9fa;
+            --success: #4CAF50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Game Section */
+        .game-section {
+            padding: 3rem 0;
+            background-color: var(--light-bg);
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--light-bg);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* How to Play Section */
+        .how-to-play {
+            padding: 5rem 0;
+            background-color: var(--light-bg);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Scoring System Section */
+        .scoring {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .scoring-details {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 15px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 5rem 0;
+            background-color: var(--light-bg);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Common Styles */
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid, .steps-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-frame {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container hero">
+            <h1>Memory Test Challenge</h1>
+            <p>Push your memory limits with our engaging 20-level memory test game</p>
+        </div>
+    </header>
+
+    <section class="game-section">
+        <div class="container">
+            <div class="game-container">
+                <iframe src="https://memoryquiz.xyz/game.html" class="game-frame" title="Memory Test Game"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Game Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Progressive Difficulty</h3>
+                    <p>Start with simple 1-digit numbers and progress to challenging 20-digit sequences.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Instant Feedback</h3>
+                    <p>Get immediate feedback on your performance with color-coded progress indicators.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Score Tracking</h3>
+                    <p>Comprehensive scoring system that rewards both accuracy and difficulty level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-to-play">
+        <div class="container">
+            <h2>How to Play</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <h3>Step 1: Observe</h3>
+                    <p>A number will appear on your screen for 5 seconds. Focus and try to memorize it.</p>
+                </div>
+                <div class="step-card">
+                    <h3>Step 2: Remember</h3>
+                    <p>The number will disappear after 5 seconds. Keep it in your memory.</p>
+                </div>
+                <div class="step-card">
+                    <h3>Step 3: Input</h3>
+                    <p>Type the number you remembered into the input box and submit your answer.</p>
+                </div>
+                <div class="step-card">
+                    <h3>Step 4: Progress</h3>
+                    <p>Move through all 20 levels, with each level adding one more digit to remember.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scoring">
+        <div class="container">
+            <h2>Scoring System</h2>
+            <div class="scoring-details">
+                <h3>How Points Are Calculated</h3>
+                <p>• Level 1: 5 points</p>
+                <p>• Level 2: 10 points</p>
+                <p>• Level 3: 15 points</p>
+                <p>• And so on, with each level worth 5 more points than the previous</p>
+                <p>• Maximum possible score: 1050 points</p>
+                <h3>Performance Ratings</h3>
+                <p>• Excellent: 840+ points (80% or higher)</p>
+                <p>• Good: 630-835 points (60-79%)</p>
+                <p>• Practice Needed: Below 630 points (Below 60%)</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>Benefits of Memory Training</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Cognitive Enhancement</h3>
+                    <p>Improve your working memory capacity and information processing speed.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Academic Performance</h3>
+                    <p>Better memory skills can lead to improved learning and academic achievements.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Professional Growth</h3>
+                    <p>Enhanced memory capabilities can boost workplace productivity and efficiency.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Daily Life Benefits</h3>
+                    <p>Strengthen your ability to remember important information in everyday situations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 MemoryQuiz.xyz - Challenge Your Memory Today</p>
+        </div>
+    </footer>
+</body>
+</html>
