@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>记忆力训练游戏</title>
+    <title>Memory Test Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -275,32 +275,32 @@
         </div>
         
         <div id="welcome-screen">
-            <h1 class="game-title">记忆力训练游戏</h1>
+            <h1 class="game-title">Memory Test Game</h1>
             <div class="game-rules">
-                <h2>游戏规则</h2>
-                <p>1. 游戏共有20关，难度逐渐增加</p>
-                <p>2. 每关显示一个数字，时间为5秒钟</p>
-                <p>3. 记住数字后，在输入框中输入你记住的数字</p>
-                <p>4. 答对显示绿色，答错显示红色</p>
-                <p>5. 计分规则：第1关5分，第2关10分，以此类推</p>
-                <p>6. 总分1050分，840分以上为优秀</p>
+                <h2>Game Rules</h2>
+                <p>1. Game consists of 20 levels with increasing difficulty</p>
+                <p>2. Each level shows a number for 5 seconds</p>
+                <p>3. Memorize and input the number you remember</p>
+                <p>4. Correct answers show green, wrong answers show red</p>
+                <p>5. Scoring: Level 1 = 5 points, Level 2 = 10 points, etc.</p>
+                <p>6. Total possible score: 1050 points, 840+ is excellent</p>
             </div>
-            <button id="start-button">开始游戏</button>
+            <button id="start-button">Start Game</button>
         </div>
 
         <div id="game-screen" class="hidden">
             <div class="number-display"></div>
             <div class="timer"></div>
             <div class="input-section hidden">
-                <input type="number" id="answer-input" placeholder="请输入你记住的数字">
-                <button id="submit-button">提交答案</button>
+                <input type="number" id="answer-input" placeholder="Enter the number you remember">
+                <button id="submit-button">Submit Answer</button>
             </div>
         </div>
 
         <div id="result-screen" class="hidden">
-            <h2>游戏结束</h2>
+            <h2>Game Over</h2>
             <div class="result"></div>
-            <button id="restart-button">再玩一次</button>
+            <button id="restart-button">Play Again</button>
         </div>
     </div>
 
@@ -434,16 +434,16 @@
                 
                 let evaluation = '';
                 if (this.score >= 840) {
-                    evaluation = '太棒了！你的记忆力非常出色！';
+                    evaluation = 'Outstanding! Your memory skills are exceptional!';
                 } else if (this.score >= 630) {
-                    evaluation = '不错！继续加油！';
+                    evaluation = 'Well done! Keep practicing!';
                 } else {
-                    evaluation = '继续练习，你会做得更好！';
+                    evaluation = 'Keep practicing, you\'ll improve!';
                 }
 
                 resultDiv.innerHTML = `
-                    <div class="score-highlight">总分：${this.score}/1050</div>
-                    <p>正确率：${correctCount}/${this.totalLevels} (${percentage}%)</p>
+                    <div class="score-highlight">Total Score: ${this.score}/1050</div>
+                    <p>Accuracy: ${correctCount}/${this.totalLevels} (${percentage}%)</p>
                     <div class="evaluation">${evaluation}</div>
                 `;
             }
